@@ -7,13 +7,13 @@
 object Android {
 
     const val appcompat         = "androidx.appcompat:appcompat:1.2.0"
-    const val coreKtx           = "androidx.core:core-ktx:1.3.1"
-    const val constraintlayout  = "androidx.constraintlayout:constraintlayout:1.1.3"
+    const val coreKtx           = "androidx.core:core-ktx:1.3.2"
+    const val constraintlayout  = "androidx.constraintlayout:constraintlayout:2.0.4"
     const val legacy            = "androidx.legacy:legacy-support-v4:1.0.0"
     const val paging            = "androidx.paging:paging-runtime:2.1.2"
     const val viewpager2        = "androidx.viewpager2:viewpager2:1.1.0-alpha01"
-    const val multidex          = "com.android.support:multidex:1.0.3"
-    const val material          = "com.google.android.material:material:1.3.0-alpha02"
+    const val multidex          = "androidx.multidex:multidex:2.0.1"
+    const val material          = "com.google.android.material:material:1.3.0"
 
     val lifecycle = Lifecycle
     object Lifecycle {
@@ -26,14 +26,14 @@ object Android {
 
     val navigation = Navigation
     object Navigation {
-        private const val navigation_version = "2.3.0"
+        private const val navigation_version = "2.3.5"
         const val fragmentKtx   = "androidx.navigation:navigation-fragment-ktx:$navigation_version"
         const val uiKtx         = "androidx.navigation:navigation-ui-ktx:$navigation_version"
     }
 
     val room = Room
     object Room {
-        private const val room_version = "2.2.3"
+        private const val room_version = "2.3.0"
         const val roomRuntime   = "androidx.room:room-runtime:$room_version"
         const val roomCompiler  = "androidx.room:room-compiler:$room_version"
         const val roomKtx       = "androidx.room:room-ktx:$room_version"
