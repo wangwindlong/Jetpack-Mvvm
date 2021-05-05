@@ -1,3 +1,4 @@
+include ':theme_library'
 include ':base-wa-library'
 rootProject.name='ZS-Jetpack'
 include ':app'

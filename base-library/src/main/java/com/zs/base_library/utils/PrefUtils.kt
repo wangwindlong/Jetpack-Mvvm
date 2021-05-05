@@ -24,7 +24,7 @@ object PrefUtils {
         key: String,
         defaultValue: Boolean
     ): Boolean {
-        val sp = BaseApp.getContext().getSharedPreferences(
+        val sp = getContext().getSharedPreferences(
             PREF_NAME,
             Context.MODE_PRIVATE
         )
@@ -32,7 +32,7 @@ object PrefUtils {
     }
 
     fun setBoolean(ctx: Context, key: String, value: Boolean) {
-        val sp = BaseApp.getContext().getSharedPreferences(
+        val sp = getContext().getSharedPreferences(
             PREF_NAME,
             Context.MODE_PRIVATE
         )
@@ -40,7 +40,7 @@ object PrefUtils {
     }
 
     fun getString(ctx: Context, key: String, defaultValue: String): String? {
-        val sp = BaseApp.getContext().getSharedPreferences(
+        val sp = getContext().getSharedPreferences(
             PREF_NAME,
             Context.MODE_PRIVATE
         )
@@ -48,7 +48,7 @@ object PrefUtils {
     }
 
     fun getString(key: String, defaultValue: String): String? {
-        val sp = BaseApp.getContext().getSharedPreferences(
+        val sp = getContext().getSharedPreferences(
             PREF_NAME,
             Context.MODE_PRIVATE
         )
@@ -56,7 +56,7 @@ object PrefUtils {
     }
 
     fun setString(ctx: Context, key: String, value: String) {
-        val sp = BaseApp.getContext().getSharedPreferences(
+        val sp = getContext().getSharedPreferences(
             PREF_NAME,
             Context.MODE_PRIVATE
         )
@@ -64,7 +64,7 @@ object PrefUtils {
     }
 
     fun setInt(ctx: Context, key: String, value: Int) {
-        val sp = BaseApp.getContext().getSharedPreferences(
+        val sp = getContext().getSharedPreferences(
             PREF_NAME,
             Context.MODE_PRIVATE
         )
@@ -72,7 +72,7 @@ object PrefUtils {
     }
 
     fun getInt(ctx: Context, key: String, defaultValue: Int): Int {
-        val sp = BaseApp.getContext().getSharedPreferences(
+        val sp = getContext().getSharedPreferences(
             PREF_NAME,
             Context.MODE_PRIVATE
         )
@@ -80,7 +80,7 @@ object PrefUtils {
     }
 
     fun setLong(ctx: Context, key: String, value: Long) {
-        val sp = BaseApp.getContext().getSharedPreferences(
+        val sp = getContext().getSharedPreferences(
             PREF_NAME,
             Context.MODE_PRIVATE
         )
@@ -88,7 +88,7 @@ object PrefUtils {
     }
 
     fun getLong(ctx: Context, key: String, defaultValue: Long): Long {
-        val sp = BaseApp.getContext().getSharedPreferences(
+        val sp = getContext().getSharedPreferences(
             PREF_NAME,
             Context.MODE_PRIVATE
         )
@@ -96,7 +96,7 @@ object PrefUtils {
     }
 
     fun setBoolean(key: String, value: Boolean) {
-        val sp = BaseApp.getContext().getSharedPreferences(
+        val sp = getContext().getSharedPreferences(
             PREF_NAME,
             Context.MODE_PRIVATE
         )
@@ -104,7 +104,7 @@ object PrefUtils {
     }
 
     fun getString(key: String): String? {
-        val sp = BaseApp.getContext().getSharedPreferences(
+        val sp = getContext().getSharedPreferences(
             PREF_NAME,
             Context.MODE_PRIVATE
         )
@@ -119,7 +119,7 @@ object PrefUtils {
     }
 
     fun setString(key: String, value: String) {
-        val sp = BaseApp.getContext().getSharedPreferences(
+        val sp = getContext().getSharedPreferences(
             PREF_NAME,
             Context.MODE_PRIVATE
         )
@@ -127,7 +127,7 @@ object PrefUtils {
     }
 
     fun setInt(key: String, value: Int) {
-        val sp = BaseApp.getContext().getSharedPreferences(
+        val sp = getContext().getSharedPreferences(
             PREF_NAME,
             Context.MODE_PRIVATE
         )
@@ -135,7 +135,7 @@ object PrefUtils {
     }
 
     fun getInt(key: String, defaultValue: Int): Int {
-        val sp = BaseApp.getContext().getSharedPreferences(
+        val sp = getContext().getSharedPreferences(
             PREF_NAME,
             Context.MODE_PRIVATE
         )
@@ -143,7 +143,7 @@ object PrefUtils {
     }
 
     fun setLong(key: String, value: Long) {
-        val sp = BaseApp.getContext().getSharedPreferences(
+        val sp = getContext().getSharedPreferences(
             PREF_NAME,
             Context.MODE_PRIVATE
         )
@@ -151,22 +151,22 @@ object PrefUtils {
     }
 
     fun getLong(key: String, defaultValue: Long): Long {
-        val sp = BaseApp.getContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val sp = getContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         return sp.getLong(key, defaultValue)
     }
 
     fun setHashSet(key: String, value: HashSet<String>) {
-        val sp = BaseApp.getContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val sp = getContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         sp.edit().putStringSet(key, value).apply()
     }
 
     fun getHashSet(key: String): MutableSet<String>? {
-        val sp = BaseApp.getContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val sp = getContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         return sp.getStringSet(key, null)
     }
 
     fun removeKey(key: String): Boolean {
-        val sp = BaseApp.getContext().getSharedPreferences(
+        val sp = getContext().getSharedPreferences(
             PREF_NAME,
             Context.MODE_PRIVATE
         )

@@ -24,16 +24,11 @@ import pub.devrel.easypermissions.EasyPermissions.PermissionCallbacks
  * @author zs
  * @date 2020-03-07
  */
-class SplashActivity : BaseVmActivity(), PermissionCallbacks {
+class SplashActivity : BaseActivity(), PermissionCallbacks {
 
     private var disposable:Disposable? = null
     private val tips = "玩安卓现在要向您申请存储权限，用于访问您的本地音乐，您也可以在设置中手动开启或者取消。"
     private val perms = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        changeTheme()
-        super.onCreate(savedInstanceState)
-    }
 
     override fun init(savedInstanceState: Bundle?) {
         requestPermission()
@@ -61,7 +56,7 @@ class SplashActivity : BaseVmActivity(), PermissionCallbacks {
         //开启服务
         //startService(Intent(this,PlayService::class.java))
         PlayerManager.instance.init(this)
-        disposable = Observable.timer(2000,TimeUnit.MILLISECONDS)
+        disposable = Observable.timer(100,TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this,MainActivity::class.java))
                 finish()
@@ -108,18 +103,6 @@ class SplashActivity : BaseVmActivity(), PermissionCallbacks {
 
     companion object {
         private const val WRITE_EXTERNAL_STORAGE = 100
-    }
-
-    /**
-     * 动态切换主题
-     */
-    private fun changeTheme() {
-        val theme = PrefUtils.getBoolean(Constants.SP_THEME_KEY,false)
-        if (theme) {
-            setTheme(R.style.AppTheme_Night)
-        } else {
-            setTheme(R.style.AppTheme)
-        }
     }
 
     /**

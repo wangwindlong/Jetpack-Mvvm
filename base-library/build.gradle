@@ -21,9 +21,10 @@ dependencies {
     /**
      * lifecycle相关包括liveData、viewModel
      */
-    api(Android.lifecycle.extensions)
-    api(Android.lifecycle.liveDataKtx)
-    api(Android.lifecycle.viewModelKtx)
+//    api(Android.lifecycle.extensions)
+//    api(Android.lifecycle.liveDataKtx)
+//    api(Android.lifecycle.viewModelKtx)
+//    kapt(Android.lifecycle.compiler)
 
     /**
      * navigation相关

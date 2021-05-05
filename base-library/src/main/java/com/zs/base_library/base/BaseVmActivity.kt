@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.zs.base_library.utils.ColorUtils
+import com.zs.base_library.utils.PrefUtils
 import com.zs.base_library.utils.StatusUtils
 
 /**
@@ -54,7 +55,6 @@ abstract class BaseVmActivity : AppCompatActivity() {
     open fun observe() {
 
     }
-
 
     /**
      * 通过activity获取viewModel，跟随activity生命周期

@@ -17,8 +17,9 @@ object Android {
 
     val lifecycle = Lifecycle
     object Lifecycle {
-        private const val lifecycle_version = "2.2.0"
+        private const val lifecycle_version = "2.3.1"
         const val extensions    = "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+        const val compiler    = "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
         const val liveDataKtx   = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
         const val commonJava8   = "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
         const val viewModelKtx  = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"

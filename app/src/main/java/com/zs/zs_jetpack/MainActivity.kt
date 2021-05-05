@@ -19,14 +19,9 @@ import com.zs.zs_jetpack.ui.MainFragment
  * @author zs
  * @date 2020-05-12
  */
-class MainActivity : BaseLoadingActivity() {
+class MainActivity : ThemedLoadingActivity() {
 
     private var playVM: PlayViewModel? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        changeTheme()
-        super.onCreate(savedInstanceState)
-    }
 
     override fun initViewModel() {
         playVM = getActivityViewModel(PlayViewModel::class.java)
@@ -52,17 +47,6 @@ class MainActivity : BaseLoadingActivity() {
 
     override fun getLayoutId() = R.layout.activity_main
 
-    /**
-     * 动态切换主题
-     */
-    private fun changeTheme() {
-        val theme = PrefUtils.getBoolean(Constants.SP_THEME_KEY, false)
-        if (theme) {
-            setTheme(R.style.AppTheme_Night)
-        } else {
-            setTheme(R.style.AppTheme)
-        }
-    }
 
     /**
      * 沉浸式状态,随主题改变
