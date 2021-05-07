@@ -31,6 +31,7 @@ abstract class BaseVmFragment : Fragment() {
     private var activityProvider: ViewModelProvider? = null
     private var dataBindingConfig: DataBindingConfig? = null
     private var mBinding: ViewDataBinding? = null
+    private var isInited = false
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -72,6 +73,12 @@ abstract class BaseVmFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        if (isAdded && isInited) {
+//            parentFragmentManager.beginTransaction().show(this).commit()
+//        } else {
+//
+//            isInited = true
+//        }
         init(savedInstanceState)
         //observe一定要在初始化最后，因为observe会收到黏性事件，随后对ui做处理
         observe()

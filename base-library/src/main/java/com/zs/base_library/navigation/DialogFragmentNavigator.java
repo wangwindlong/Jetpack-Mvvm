@@ -38,12 +38,14 @@ import androidx.navigation.NavOptions;
 import androidx.navigation.Navigator;
 import androidx.navigation.NavigatorProvider;
 
+import com.zs.base_library.R;
 
+import java.util.HashSet;
 
 /**
  * Navigator that uses {@link DialogFragment#show(FragmentManager, String)}. Every
  * destination using this Navigator must set a valid DialogFragment class name with
- * <code>android:name</code> or {@link Destination#setClassName(String)}.
+ * <code>android:name</code> or {@link DialogFragmentNavigator.Destination#setClassName(String)}.
  */
 @Navigator.Name("dialog")
 public final class DialogFragmentNavigator extends Navigator<DialogFragmentNavigator.Destination> {
@@ -54,11 +56,12 @@ public final class DialogFragmentNavigator extends Navigator<DialogFragmentNavig
     private final Context mContext;
     private final FragmentManager mFragmentManager;
     private int mDialogCount = 0;
+    private final HashSet<String> mRestoredTagsAwaitingAttach = new HashSet<>();
 
     private LifecycleEventObserver mObserver = new LifecycleEventObserver() {
         @Override
         public void onStateChanged(@NonNull LifecycleOwner source,
-                @NonNull Lifecycle.Event event) {
+                                   @NonNull Lifecycle.Event event) {
             if (event == Lifecycle.Event.ON_STOP) {
                 DialogFragment dialogFragment = (DialogFragment) source;
                 if (!dialogFragment.requireDialog().isShowing()) {
@@ -94,14 +97,14 @@ public final class DialogFragmentNavigator extends Navigator<DialogFragmentNavig
 
     @NonNull
     @Override
-    public Destination createDestination() {
-        return new Destination(this);
+    public DialogFragmentNavigator.Destination createDestination() {
+        return new DialogFragmentNavigator.Destination(this);
     }
 
     @Nullable
     @Override
-    public NavDestination navigate(@NonNull final Destination destination, @Nullable Bundle args,
-                                   @Nullable NavOptions navOptions, @Nullable Extras navigatorExtras) {
+    public NavDestination navigate(@NonNull final DialogFragmentNavigator.Destination destination, @Nullable Bundle args,
+                                   @Nullable NavOptions navOptions, @Nullable Navigator.Extras navigatorExtras) {
         if (mFragmentManager.isStateSaved()) {
             Log.i(TAG, "Ignoring navigate() call: FragmentManager has already"
                     + " saved its state");
@@ -147,10 +150,17 @@ public final class DialogFragmentNavigator extends Navigator<DialogFragmentNavig
                 if (fragment != null) {
                     fragment.getLifecycle().addObserver(mObserver);
                 } else {
-                    throw new IllegalStateException("DialogFragment " + index
-                            + " doesn't exist in the FragmentManager");
+                    mRestoredTagsAwaitingAttach.add(DIALOG_TAG + index);
                 }
             }
+        }
+    }
+
+    // TODO: Switch to FragmentOnAttachListener once we depend on Fragment 1.3
+    void onAttachFragment(@NonNull Fragment childFragment) {
+        boolean needToAddObserver = mRestoredTagsAwaitingAttach.remove(childFragment.getTag());
+        if (needToAddObserver) {
+            childFragment.getLifecycle().addObserver(mObserver);
         }
     }
 
@@ -182,7 +192,7 @@ public final class DialogFragmentNavigator extends Navigator<DialogFragmentNavig
          *                          {@link NavController}'s
          *                          {@link NavigatorProvider#getNavigator(Class)} method.
          */
-        public Destination(@NonNull Navigator<? extends Destination> fragmentNavigator) {
+        public Destination(@NonNull Navigator<? extends DialogFragmentNavigator.Destination> fragmentNavigator) {
             super(fragmentNavigator);
         }
 
@@ -191,8 +201,8 @@ public final class DialogFragmentNavigator extends Navigator<DialogFragmentNavig
         public void onInflate(@NonNull Context context, @NonNull AttributeSet attrs) {
             super.onInflate(context, attrs);
             TypedArray a = context.getResources().obtainAttributes(attrs,
-                    androidx.navigation.fragment.R.styleable.DialogFragmentNavigator);
-            String className = a.getString(androidx.navigation.fragment.R.styleable.DialogFragmentNavigator_android_name);
+                    R.styleable.DialogFragmentNavigator);
+            String className = a.getString(R.styleable.DialogFragmentNavigator_android_name);
             if (className != null) {
                 setClassName(className);
             }
@@ -203,10 +213,10 @@ public final class DialogFragmentNavigator extends Navigator<DialogFragmentNavig
          * Set the DialogFragment class name associated with this destination
          * @param className The class name of the DialogFragment to show when you navigate to this
          *                  destination
-         * @return this {@link Destination}
+         * @return this {@link DialogFragmentNavigator.Destination}
          */
         @NonNull
-        public final Destination setClassName(@NonNull String className) {
+        public final DialogFragmentNavigator.Destination setClassName(@NonNull String className) {
             mClassName = className;
             return this;
         }
